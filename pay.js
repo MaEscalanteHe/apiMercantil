@@ -29,7 +29,10 @@ var options = {
 			account_type: 'CC',
 			twofactor_auth: 'dltbeXR9TP1gKN49mCPatQ==',
 			expiration_date: '2021/11',
-			cvv: '1C/ZAsci1qStYWHBWCZggg==',
+			cvv: 'UOQ3FQcm8b+hapIt6RLLtQ==',
+			// UOQ3FQcm8b+hapIt6RLLtQ==
+			// W37RjrhB5+6bsg+z8mqy4Q==
+			// 1C/ZAsci1qStYWHBWCZggg==
 			currency: 'ves',
 			amount: 30.12,
 		},

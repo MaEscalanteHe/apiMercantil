@@ -1,18 +1,18 @@
 {
-  "name": "apiMercantil",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "request": "^2.88.2"
-  },
-  "dependencies": {
-    "yargs": "^15.1.0"
-  }
+	"name": "apimercantil",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"request": "^2.88.2"
+	},
+	"dependencies": {
+		"yargs": "^15.1.0"
+	}
 }
