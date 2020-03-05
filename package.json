@@ -1,18 +1,19 @@
 {
 	"name": "apimercantil",
 	"version": "1.0.0",
-	"description": "",
-	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"auth": "node auth.js",
+		"pay": "node pay.js",
+		"search": "node search.js",
+		"key": "node key.js"
 	},
 	"keywords": [],
-	"author": "",
-	"license": "ISC",
-	"devDependencies": {
-		"request": "^2.88.2"
-	},
+	"author": "Manuel Escalante",
+	"license": "MIT",
 	"dependencies": {
 		"yargs": "^15.1.0"
+	},
+	"devDependencies": {
+		"request": "^2.88.2"
 	}
 }

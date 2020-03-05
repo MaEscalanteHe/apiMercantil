@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 
-const cvv = '563';
-const annon = '1C/ZAsci1qStYWHBWCZggg==';
+const cvv = '752';
+const tlf = '1234';
 
 const keyBank = 'A9279120481620090622AA30';
 
@@ -48,51 +48,76 @@ hexHK[16]: ${hexHK_16}
 -----`);
 
 const encrypt = function(key, opt, iv, data) {
-	if (opt === 'base64' || opt === 'hex' || opt === 'binary') {
+	if (opt === 'base64' || opt === 'hex') {
 		let cipher = crypto.createCipheriv('aes-128-ecb', key, iv);
 		let crypted = cipher.update(data, 'utf8', opt);
 		crypted += cipher.final(opt);
 		crypted.trim();
+		return crypted;
+	} else if (opt === 'binary') {
+		let cipher = crypto.createCipheriv('aes-128-ecb', key, iv);
+		let crypted = cipher.update(data, 'utf8', opt);
+		crypted += cipher.final(opt);
+		crypted.trim();
+
+		// crypted = new Buffer(crypted, 'binary').toString('base64');
+		crypted = Buffer.from(crypted, 'binary').toString('base64');
+
 		return crypted;
 	} else {
 		console.log('Error en encrypt');
 	}
 };
 
-let binary_encrypt = encrypt(binaryHK_16, 'binary', '', cvv) || undefined;
-let base64_encrypt = encrypt(base64HK_16, 'base64', '', cvv);
-let hex_encrypt = encrypt(hexHK_16, 'hex', '', cvv);
+let cvv_binary_encrypt = encrypt(binaryHK_16, 'binary', '', cvv);
+let cvv_base64_encrypt = encrypt(base64HK_16, 'base64', '', cvv);
+let cvv_hex_encrypt = encrypt(hexHK_16, 'hex', '', cvv);
+let tlf_binary_encrypt = encrypt(binaryHK_16, 'binary', '', tlf);
+let tlf_base64_encrypt = encrypt(base64HK_16, 'base64', '', tlf);
+let tlf_hex_encrypt = encrypt(hexHK_16, 'hex', '', tlf);
 
 console.log(`-----
-binary_encrypt: ${binary_encrypt}
-base64_encrypt: ${base64_encrypt}
-hex_encrypt: ${hex_encrypt}
+cvv_binary_encrypt: ${cvv_binary_encrypt}
+cvv_base64_encrypt: ${cvv_base64_encrypt}
+cvv_hex_encrypt: ${cvv_hex_encrypt}
+tlf_binary_encrypt: ${tlf_binary_encrypt}
+tlf_base64_encrypt: ${tlf_base64_encrypt}
+tlf_hex_encrypt: ${tlf_hex_encrypt}
 -----`);
 
 var decrypt = function(key, opt, iv, crypted) {
-	if (opt === 'base64' || opt === 'hex' || opt === 'binary') {
-		// crypted = new Buffer(crypted, 'base64').toString('binary');
+	if (opt === 'base64' || opt === 'hex') {
 		var decipher = crypto.createDecipheriv('aes-128-ecb', key, iv);
 		var decoded = decipher.update(crypted, opt, 'utf8');
-		// console.log(decoded);
 		decoded += decipher.final('utf8');
-		//console.log(decoded);
+
+		return decoded;
+	} else if (opt === 'binary') {
+		// crypted = new Buffer(crypted, 'base64').toString('binary');
+		crypted = Buffer.from(crypted, 'base64').toString('binary');
+
+		var decipher = crypto.createDecipheriv('aes-128-ecb', key, iv);
+		var decoded = decipher.update(crypted, opt, 'utf8');
+		decoded += decipher.final('utf8');
+
 		return decoded;
 	} else {
 		console.log('Error en decrypt');
 	}
 };
 
-// let test = decrypt(binaryHK_16, 'binary', '', annon);
-
-let binary_decrypt = decrypt(binaryHK_16, 'binary', '', binary_encrypt) || undefined;
-let base64_decrypt = decrypt(base64HK_16, 'base64', '', base64_encrypt);
-let hex_decrypt = decrypt(hexHK_16, 'hex', '', hex_encrypt);
+let cvv_binary_decrypt = decrypt(binaryHK_16, 'binary', '', cvv_binary_encrypt);
+let cvv_base64_decrypt = decrypt(base64HK_16, 'base64', '', cvv_base64_encrypt);
+let cvv_hex_decrypt = decrypt(hexHK_16, 'hex', '', cvv_hex_encrypt);
+let tlf_binary_decrypt = decrypt(binaryHK_16, 'binary', '', tlf_binary_encrypt);
+let tlf_base64_decrypt = decrypt(base64HK_16, 'base64', '', tlf_base64_encrypt);
+let tlf_hex_decrypt = decrypt(hexHK_16, 'hex', '', tlf_hex_encrypt);
 
 console.log(`-----
-binary_decrypt: ${binary_decrypt}
-base64_decrypt: ${base64_decrypt}
-hex_decrypt: ${hex_decrypt}
+cvv_binary_decrypt: ${cvv_binary_decrypt}
+cvv_base64_decrypt: ${cvv_base64_decrypt}
+cvv_hex_decrypt: ${cvv_hex_decrypt}
+tlf_binary_decrypt: ${tlf_binary_decrypt}
+tlf_base64_decrypt: ${tlf_base64_decrypt}
+tlf_hex_decrypt: ${tlf_hex_decrypt}
 -----`);
-
-// 1C/ZAsci1qStYWHBWCZggg==
